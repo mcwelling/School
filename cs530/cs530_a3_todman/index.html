@@ -1,0 +1,173 @@
+<!--
+    McWelling H Todman, mht47@drexel.edu
+    CS530: DUI, Assignment [3]
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Function Grapher</title>
+    <meta charset="utf-8"/>
+    <link href="static/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="static/lib/jquery/jquery.min.js"></script>
+    <script src="static/lib/popper/popper.min.js"></script>
+    <script src="static/lib/bootstrap/bootstrap.min.js"></script>
+    <link href="static/css/grapher.css" rel="stylesheet">
+    <script src="static/js/grapher.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <nav class="navbar navbar-dark">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Function Grapher</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="grapher-wrapper" class="canvas-container" style="text-align:center">
+    </div>
+
+    <div id="form-wrapper" style="text-align:center" class="form-container">
+        <form id="number-form">
+            Y = <input id="third" type="number" name="third">
+            X³ + <input id="second" type="number" name="second">
+            X² + <input id="first" type="number" name="first">
+            X + <input id="constant" type="number" name="constant">
+        </form>
+    </div>
+
+    <script>
+
+        $(function() {
+            // create your Grapher here within the #grapher-wrapper div
+            myGrapher = new Grapher();
+            myGrapher.build('#grapher-wrapper');
+        });
+
+        // keyup handler for constant multiplier of degree 3 term
+        $("#third").keyup(function() {
+            $('canvas').remove();
+            myGrapher.build('#grapher-wrapper');
+            var myForm = document.getElementById("number-form");
+            
+            var p3 = myForm.elements[0].value;
+            var p2 = myForm.elements[1].value;
+            var p1 = myForm.elements[2].value;
+            var p0 = myForm.elements[3].value;
+            
+            myGrapher.generateData(p3,p2,p1,p0);
+            myGrapher.plot(dataset);
+        });
+
+        // keyup handler for constant multiplier of degree 2 term
+        $("#second").keyup(function() {
+            $('canvas').remove();
+            myGrapher.build('#grapher-wrapper');
+            var myForm = document.getElementById("number-form");
+            
+            var p3 = myForm.elements[0].value;
+            var p2 = myForm.elements[1].value;
+            var p1 = myForm.elements[2].value;
+            var p0 = myForm.elements[3].value;
+            
+            myGrapher.generateData(p3,p2,p1,p0);
+            myGrapher.plot(dataset);
+        });
+
+        // keyup handler for constant multiplier of degree 1 term
+        $("#first").keyup(function() {
+            $('canvas').remove();
+            myGrapher.build('#grapher-wrapper');
+            var myForm = document.getElementById("number-form");
+            
+            var p3 = myForm.elements[0].value;
+            var p2 = myForm.elements[1].value;
+            var p1 = myForm.elements[2].value;
+            var p0 = myForm.elements[3].value;
+            
+            myGrapher.generateData(p3,p2,p1,p0);
+            myGrapher.plot(dataset);
+        });
+
+        // keyup handler for constant term
+        $("#constant").keyup(function() {
+            $('canvas').remove();
+            myGrapher.build('#grapher-wrapper');
+            var myForm = document.getElementById("number-form");
+            
+            var p3 = myForm.elements[0].value;
+            var p2 = myForm.elements[1].value;
+            var p1 = myForm.elements[2].value;
+            var p0 = myForm.elements[3].value;
+            
+            myGrapher.generateData(p3,p2,p1,p0);
+            myGrapher.plot(dataset);
+        });
+
+    </script>
+
+    <script>
+
+        // trigger for mouse movement on canvas wrapper (same size as canvas)
+        $('#grapher-wrapper').on( "mousemove", showPostition );
+        
+        // payload function for mouse movement trigger - draws data label
+        function showPostition (event) {
+
+            var xval = event.offsetX;
+
+            var formCopy = document.getElementById("number-form");
+            
+            var e3 = formCopy.elements[0].value;
+            var e2 = formCopy.elements[1].value;
+            var e1 = formCopy.elements[2].value;
+            var e0 = formCopy.elements[3].value;
+
+            // get y value from x, translate to canvas coordinates
+            var cartesian_position = detranslate(xval, 0);
+            var yval = evaluate(e3,e2,e1,e0,cartesian_position[0]);
+            cartesian_position[1] = yval;
+            var position = translate(cartesian_position[0],yval);
+
+            // create data label text
+            var label = Math.round(cartesian_position[0]*100)/100 
+                        + ', ' 
+                        + Math.round(cartesian_position[1]*100)/100;
+            
+            // measure data label and set parameters for drawing the label
+            hover_ctx = document.getElementById('canvas').getContext("2d");
+            hover_ctx.beginPath();
+            var width = hover_ctx.measureText(label).width;
+            hover_ctx.font = '15px Helvetica';
+            hover_ctx.fillStyle = '#007f00';
+            hover_ctx.strokeStyle = '#ffffff';
+
+            // draw the label
+            hover_ctx.fillRect(position[0],position[1],width,20);
+            hover_ctx.strokeText(label, position[0], position[1]+15);
+
+            // optional trigger to make datalabels disappear after 5000ms
+            /*
+            setTimeout(function () {
+                $('#constant').keyup();
+            }, 5000);
+            */
+
+        }
+
+    </script>
+
+</body>
+
+</html>

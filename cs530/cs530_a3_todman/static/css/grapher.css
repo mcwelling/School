@@ -1,0 +1,56 @@
+/*
+    McWelling H Todman, mht47@drexel.edu
+    CS530: DUI, Assignment [3]
+*/
+
+body {
+    font-family: "Avenir";
+    font-size: 1rem;
+    background: #eee;
+}
+
+header {
+    background: #354796;
+}
+
+.canvas-container {
+    position: relative;
+    top: 5rem;
+    width:fit-content;
+    height:fit-content;
+    margin:auto;
+    text-align: center;
+}
+
+canvas {
+    position: relative;
+    top: 0;
+    right: 0;
+    background: #fff;
+    border: solid 1px #888;
+}
+
+.canvas-dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    padding-top: 233px;
+    background: rgba(174, 174, 184, 0.8);
+    width: 722px;
+    height: 562px;
+    text-align: center;
+    color: green;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 4rem;
+}
+
+.form-container {
+    position: relative;
+    top: 5rem;
+}
+
+.demo {
+    top: 5rem;
+    position: relative;
+}
