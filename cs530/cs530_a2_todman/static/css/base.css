@@ -1,0 +1,82 @@
+/*
+    McWelling H Todman, mht47@drexel.edu
+    CS530: DUI, Assignment [2]
+*/
+
+body {
+    font-family: "Avenir";
+    font-size: 1rem;
+    background: #ffffff;
+}
+
+header {
+    background: #006298;
+}
+
+.btn-primary {
+    background: #507C49;
+    border-color: #406C39;
+}
+
+.btn-primary:hover {
+    background: #608C59;
+    border-color: #406C39;
+}
+
+/* style for reset button */
+.btn-secondary {
+    background: #b20000;
+    border-color: #990000;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: #CC0000;
+    border-color: #b20000;
+    display: inline-block;
+}
+
+/* style for increment and decrement buttons */
+.btn-tertiary {
+    height: 70%;
+    width: 45%;
+    background: #d3d3d3;
+    border-color: #808080;
+    margin-inline: .25rem;
+}
+
+.btn-tertiary:hover {
+    height: 70%;
+    width: 45%;
+    background: #dcdcdc;
+    border-color: #a9a9a9;
+    margin-inline: .25rem;
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #FFC600;
+}
+
+.content {
+    padding: 2rem 1.5rem;
+}
+
+.jumbotron {
+    padding: 1.5rem;
+    background: 0;
+}
+
+.jumbotron img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.table img {
+    max-inline-size: 100px;
+}
+
+/* opacity switch for inventory rows */
+.inventoryRow.unavailable {
+    opacity: .25
+}

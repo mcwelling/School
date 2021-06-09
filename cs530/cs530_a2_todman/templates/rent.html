@@ -1,0 +1,37 @@
+<!--
+    McWelling H Todman, mht47@drexel.edu
+    CS530: DUI, Assignment [2]
+-->
+
+{% extends 'base.html' %}
+{% set active = "Rent a Bike" %}
+
+{% block header %}
+<script src="/static/js/rentView.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>Rent a Bike</h1>
+
+<p>
+    Please select a rental from our available bikes below!
+</p>
+
+<!-- table with uniquely identified reference components -->
+<table id="inventoryTable" class="table">
+    <thead id="inventoryHeader"></thead>
+    <tbody id="inventoryBody"></tbody>
+</table>
+
+<!-- instantiation of rentView js function/class -->
+<script>
+
+    $(function () {
+        const rentView = new RentView(10,1);
+        rentView.load();
+    });
+
+</script>
+
+{% endblock %}
