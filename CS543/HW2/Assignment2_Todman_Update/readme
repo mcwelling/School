@@ -1,0 +1,31 @@
+Class: CS543
+Student Name: McWelling Todman
+Readme File: Assignment 2
+
+Status: Uncertain. Tentatively minor success.
+
+Details: Everything appears to run okay. I wish I was better equipped to perform testing beyond changing the priority around compiling and running the test1.b limbo file... I'm just out of my depth.
+
+Approach:
+	- Summary
+		- opted to implement pseudo priority queue by searching the run queue for the highest priority item and moving it to the front of the list
+			- I went with this approach because it was more intuitive for me to implement, as I am not yet comfortable with the C language and pointers
+		- added 'setnice' functionality to allowing for the nice value of a process to be changed
+	- file modifications
+		- include/interp.h
+			- added members 'nice' and 'priority' to the Proc structure
+			- purposed the unused member 'ticks' to record the instruction count
+		- emu/port/dis.c
+			- vmachine()
+				- added scheduling (search and run) logic to find the highest priority process in the run queue and move it the front of the list
+				- added priority calculator to the main if statement after the resolution of xec()
+		- libinterp/xec.c
+			- xec()
+				- updated the while loop to increment ticks element in current process entry
+		- emu/port/devprog.c
+			- added CMsetnice to enum and cmdprog as well as a case to handle in the corresponding switch statement governing file write behavior
+				- I am looking forward to learning more about this bit, as the I did not find the driver piece intuitive at all.
+
+
+Feedback for Professor:
+	- You weren't kidding about throwing us into the deep end. As someone without a traditional CS background (econ undergrad) and little exposure to the C language, I was very appreciative of the hand holding and prescriptive feedback in recitation section. I devoted a lot of time and energy to this assignment and think I learned quite a bit about how the various moving parts fit together.

@@ -1,0 +1,35 @@
+Class: CS543
+Student Name: McWelling Todman
+Readme File: Assignment 4
+
+Status: Moderate success.
+
+Details: Everything appears to run okay. I wish I was better equipped to perform testing beyond changing the priority around compiling and running the test1.b limbo file... I'm just out of my depth.
+
+Approach:
+	- Summary
+		- opted to implement the pseudo raid zero server in the kernel using the skeleton file provided by Prof BLS.
+	- file modifications
+		- emu/port/devraidzero.c
+			- added command CMbind to Cmdtab structure as well as a case to handle in the write function so that our "disk" files (r0, r1) can be bound via a write to the control file. The result of this write is the creation of a discrete channels to each file that can be utilized by the read and write functions.
+			-raidzeroread()
+				- added functionality to handle reads from the data file by splitting the request into blocks and reading the even blocks from r0 and odd blocks from r1. The logic to do this was lifted from the rread function in KFS as recommended by BLS in recitation. Unfortunately, I was not sure how to control for the EOF condition in this circumstance. I assume it is accessible via the channel interface--I'm just not sure how that works and don't have the time to play around with it because I am at work.
+			- raidzerowrite()
+				- added functionality to handle writes to the data file by splitting the request into blocks and routing the even blocks to r0 and odd blocks to r1. The logic to do this was lifted from the rread function in KFS as recommended by BLS in recitation.
+		- usr/inferno/r0 and usr/inferno/r1
+			- these are the underlying data files that simulate the "disks" in my raid zero server.
+			- these were created using the 'zeros 1024 2048' method as recommended in the kfs documentation
+
+
+Testing:
+	- writes of varying size were made to the data file
+	- dd reads were used to validate the split of blocks between r0 and r1
+
+Ommissions:
+	- I have minimal--no borderline zero--error handling
+	- I did not control for the end of file indicator in the read
+	- I did not test this by using it as the underlying drive for kfs
+
+
+Feedback for Professor:
+	- Thanks for making sure we learned something this quarter. I imagine you and many of other faculty members were scrambling because going fully virtual is not a trivial matter. I just want to make sure you know the time, effort, and care put into the lectures and recitations was both noticed and appreciated.
